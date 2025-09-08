@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting to Snapchat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #fffc00 0%, #fffc00 50%, #000 50%, #000 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .header {
+            background-color: #000;
+            padding: 30px 20px;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #fffc00;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.8;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background-color: #000;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            color: #fffc00;
+        }
+        
+        .instructions {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .instructions h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .button {
+            display: inline-block;
+            background-color: #fffc00;
+            color: #000;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            border: 2px solid #000;
+        }
+        
+        .button:hover {
+            background-color: #000;
+            color: #fffc00;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+        }
+        
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Snapchat Redirect</h1>
+            <p>You're being redirected to Snapchat</p>
+        </div>
+        
+        <div class="content">
+            <div class="logo">👻</div>
+            
+            <h2>Follow me on Snapchat!</h2>
+            <p>Add me on Snapchat to see my daily stories</p>
+            
+            <div class="instructions">
+                <h3>How this works:</h3>
+                <ol>
+                    <li>Click the button below to open my Snapchat profile</li>
+                    <li>If you have the Snapchat app installed, it will open directly</li>
+                    <li>If you don't have the app, it will open in your browser</li>
+                    <li>Add me as a friend on Snapchat!</li>
+                </ol>
+            </div>
+            
+            <a href="#" id="snapchatLink" class="button">Open Snapchat</a>
+            
+            <p class="footer">This page will automatically redirect in <span id="countdown">5</span> seconds</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the Snapchat username from the URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            let username = urlParams.get('user') || 'sammy_vocals'; // Default username
+            
+            // Encode the username for the deep link
+            const encodedUsername = encodeURIComponent(username);
+            
+            // Create the deep link URL
+            const appDeepLink = `snapchat://add/${encodedUsername}`;
+            const webURL = `https://www.snapchat.com/add/${encodedUsername}`;
+            
+            // Set the button href
+            const snapchatButton = document.getElementById('snapchatLink');
+            snapchatButton.href = appDeepLink;
+            
+            // Function to redirect to the web URL
+            function redirectToWeb() {
+                window.location.href = webURL;
+            }
+            
+            // Countdown timer
+            let count = 5;
+            const countdownElement = document.getElementById('countdown');
+            
+            const countdownInterval = setInterval(function() {
+                count--;
+                countdownElement.textContent = count;
+                
+                if (count <= 0) {
+                    clearInterval(countdownInterval);
+                    redirectToWeb();
+                }
+            }, 1000);
+            
+            // Try to open the app immediately
+            window.location.href = appDeepLink;
+            
+            // If the app doesn't open, redirect to web after a short delay
+            setTimeout(function() {
+                if (!document.webkitHidden && !document.hidden) {
+                    redirectToWeb();
+                }
+            }, 2000);
+            
+            // Handle visibility change for mobile devices
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    // Tab switched (likely to Snapchat app), stop the redirect
+                    clearInterval(countdownInterval);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
