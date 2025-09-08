@@ -1,35 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting...</title>
-    <script>
-        function isMobile() {
-            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    <script type="text/javascript">
+        // Pehla try: Direct YouTube app kholne ka try karta hai (Android & iOS)
+        function openYouTubeApp() {
+            // Android ke liye Intent Link
+            window.location.href = 'intent://www.youtube.com/@DJ-Shitiz#Intent;package=com.google.android.youtube;scheme=https;end;';
+            // Agar upar wala kaam na kare, toh thodi der baad niche wala method try hoga
+            setTimeout(function() {
+                window.location.href = "https://www.youtube.com/@DJ-Shitiz";
+            }, 500);
         }
 
-        window.onload = function() {
-            if (isMobile()) {
-                // Example: Redirect to custom app scheme or fallback URL
-                var appScheme = 'myapp://open';  // Replace with your app's custom URL scheme
-                var fallbackURL = 'https://sammy.adxpi.com/link';  // Fallback to website if app not installed
-                
-                // Try to open the app
-                window.location = appScheme;
-
-                // After a short delay, fallback to web page
-                setTimeout(function() {
-                    window.location = fallbackURL;
-                }, 2000);
-            } else {
-                // If desktop, maybe show a normal page
-                document.body.innerHTML = "<h1>Please open this page on your mobile device.</h1>";
-            }
-        }
+        // Page load hote hi function ko call kardo
+        window.onload = openYouTubeApp;
     </script>
 </head>
 <body>
-    <h1>Redirecting, please wait...</h1>
+    <noscript>
+        <!-- Agar browser mein JavaScript band ho, toh yeh link dikhega -->
+        <h2>Redirecting to YouTube</h2>
+        <p>If you are not redirected automatically, <a href="https://www.youtube.com/@DJ-Shitiz">click here</a>.</p>
+    </noscript>
 </body>
 </html>
