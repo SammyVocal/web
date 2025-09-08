@@ -4,27 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting...</title>
+    <script>
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
 
-    <!-- Important Meta Tag to Prevent Instagram from Indexing -->
-    <meta name="robots" content="noindex, nofollow">
-
-    <script type="text/javascript">
-        // Try to open in system browser
         window.onload = function() {
-            // Use window.location.href to force redirect
-            window.location.href = "https://sammy.adxpi.com/links"; // Your target URL
+            if (isMobile()) {
+                // Example: Redirect to custom app scheme or fallback URL
+                var appScheme = 'myapp://open';  // Replace with your app's custom URL scheme
+                var fallbackURL = 'https://sammy.adxpi.com/link';  // Fallback to website if app not installed
+                
+                // Try to open the app
+                window.location = appScheme;
 
-            // Optional fallback: Show message if auto-redirect fails
-            setTimeout(function() {
-                document.getElementById('fallback').style.display = 'block';
-            }, 3000);
+                // After a short delay, fallback to web page
+                setTimeout(function() {
+                    window.location = fallbackURL;
+                }, 2000);
+            } else {
+                // If desktop, maybe show a normal page
+                document.body.innerHTML = "<h1>Please open this page on your mobile device.</h1>";
+            }
         }
     </script>
 </head>
 <body>
-    <h1>Redirecting you to the browser...</h1>
-    <p id="fallback" style="display:none;">
-        If you are not redirected, <a href="sammy.adxpi.com/links" target="_blank">click here to open in Chrome</a>.
-    </p>
+    <h1>Redirecting, please wait...</h1>
 </body>
 </html>
