@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting to Facebook</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(to bottom, #3b5998, #3b5998 50%, #f7f7f7 50%, #f7f7f7 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .header {
+            background-color: #3b5998;
+            padding: 30px 20px;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background-color: #3b5998;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            color: white;
+        }
+        
+        .instructions {
+            background-color: #f0f2f5;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .instructions h3 {
+            margin-bottom: 10px;
+            color: #1c1e21;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #4b4f56;
+        }
+        
+        .button {
+            display: inline-block;
+            background-color: #1877f2;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .button:hover {
+            background-color: #166fe5;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .username {
+            font-weight: bold;
+            color: #385898;
+            background-color: #f0f2f5;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #8a8d91;
+        }
+        
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Facebook Redirect</h1>
+            <p>You're being redirected to Facebook</p>
+        </div>
+        
+        <div class="content">
+            <div class="logo">
+                <svg viewBox="0 0 24 24" width="40" height="40" fill="white">
+                    <path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96C18.34 21.21 22 17.06 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/>
+                </svg>
+            </div>
+            
+            <h2>Connect with me on Facebook!</h2>
+            <p>See my latest updates and posts</p>
+            
+            <div class="username" id="displayUsername">@sameersingh.rajput.5437923</div>
+            
+            <div class="instructions">
+                <h3>How this works:</h3>
+                <ol>
+                    <li>Click the button below to open my Facebook profile</li>
+                    <li>If you have the Facebook app installed, it will open directly</li>
+                    <li>If you don't have the app, it will open in your browser</li>
+                    <li>Send me a friend request or follow me!</li>
+                </ol>
+            </div>
+            
+            <a href="#" id="facebookLink" class="button">Open Facebook</a>
+            
+            <p class="footer">This page will automatically redirect in <span id="countdown">5</span> seconds</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the Facebook username from the URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            let username = urlParams.get('user') || 'sameersingh.rajput.5437923'; // Default username
+            
+            // Remove @ symbol if present
+            username = username.replace('@', '');
+            
+            // Display the username on the page
+            document.getElementById('displayUsername').textContent = '@' + username;
+            
+            // Create the deep link URL
+            const appDeepLink = `fb://profile/${username}`;
+            const webURL = `https://www.facebook.com/${username}/`;
+            
+            // Set the button href
+            const facebookButton = document.getElementById('facebookLink');
+            facebookButton.href = appDeepLink;
+            
+            // Function to redirect to the web URL
+            function redirectToWeb() {
+                window.location.href = webURL;
+            }
+            
+            // Countdown timer
+            let count = 5;
+            const countdownElement = document.getElementById('countdown');
+            
+            const countdownInterval = setInterval(function() {
+                count--;
+                countdownElement.textContent = count;
+                
+                if (count <= 0) {
+                    clearInterval(countdownInterval);
+                    redirectToWeb();
+                }
+            }, 1000);
+            
+            // Try to open the app immediately
+            window.location.href = appDeepLink;
+            
+            // If the app doesn't open, redirect to web after a short delay
+            setTimeout(function() {
+                if (!document.webkitHidden && !document.hidden) {
+                    redirectToWeb();
+                }
+            }, 2000);
+            
+            // Handle visibility change for mobile devices
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    // Tab switched (likely to Facebook app), stop the redirect
+                    clearInterval(countdownInterval);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
