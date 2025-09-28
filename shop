@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+    }
+
+    .container {
+      width: 95%;
+      margin: auto;
+      padding: 20px 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* Default mobile view */
+      gap: 15px;
+    }
+
+    @media (min-width: 768px) {
+      .grid {
+        grid-template-columns: repeat(3, 1fr); /* Tablet view */
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .grid {
+        grid-template-columns: repeat(4, 1fr); /* Laptop/Desktop view */
+      }
+    }
+
+    .product {
+      background: #fff;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .product:hover {
+      transform: scale(1.03);
+    }
+
+    .product img {
+      width: 100%;
+      height: 200px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .product h3 {
+      font-size: 16px;
+      color: #333;
+      margin: 10px 0;
+      height: 40px;
+      overflow: hidden;
+    }
+
+    .product a {
+      display: inline-block;
+      padding: 8px 15px;
+      background: #2874f0;
+      color: #fff;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .product a:hover {
+      background: #0b56d0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 style="text-align:center; color:#2874f0;">My Shopping Page</h1>
+    <div class="grid">
+      
+      <!-- Product Card -->
+      <div class="product">
+        <img src="https://rukminim2.flixcart.com/image/832/832/xif0q/television/l/o/i/-original-imahdztawzu8ups9.jpeg" alt="Product">
+        <h3>Ultra HD (4K) Smart Google TV 2025</h3>
+        <a href="https://www.flipkart.com/tcl-t6c-139-cm-55-inch-qled-ultra-hd-4k-smart-google-tv-2025-hdr-10-dolby-vision-atmos-24w-120-hz-game-accelerator-dlg-metallic-bezel-less/p/itm003e55d4c2417?pid=TVSHAVHGJEZZCATB&lid=LSTTVSHAVHGJEZZCATBIHLT7C&marketplace=FLIPKART&q=new+launch+tv&store=ckf%2Fczl&srno=s_1_3&otracker=AS_QueryStore_OrganicAutoSuggest_1_12_na_na_ps&otracker1=AS_QueryStore_OrganicAutoSuggest_1_12_na_na_ps&fm=organic&iid=9f9b1dee-026d-443e-80a7-08878a815d56.TVSHAVHGJEZZCATB.SEARCH&ppt=pp&ppn=pp&ssid=6v4o50tids0000001759032594836&qH=185959db4d7f9489" target="_blank">Buy Now</a>
+      </div>
+
+      <div class="product">
+        <img src="https://rukminim2.flixcart.com/image/832/832/xif0q/t-shirt/s/j/g/l-fmt448-los-gry-force-original-imahejfgztydz85x.jpeg" alt="Product">
+        <h3>Cotton Blend Grey T-Shirt</h3>
+        <a href="https://www.amazon.in/Apple-iPhone-13-128GB-Blue/dp/B09G9BL5CP/ref=pd_ci_mcx_mh_mcx_views_0_title?pd_rd_w=H74mx&content-id=amzn1.sym.04d3fdac-1b15-414f-91d2-0c9aaaf137d6%3Aamzn1.symc.30e3dbb4-8dd8-4bad-b7a1-a45bcdbc49b8&pf_rd_p=04d3fdac-1b15-414f-91d2-0c9aaaf137d6&pf_rd_r=SPAHZ53RYB37VC2VBRMS&pd_rd_wg=whnTN&pd_rd_r=a9960a03-651a-4ad9-a90e-07b81d271ac7&pd_rd_i=B09G9BL5CP" target="_blank">Buy Now</a>
+      </div>
+
+      <!-- Duplicate product cards to reach 25 products -->
+      <!-- Just copy-paste below block and replace image, title & link -->
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71bBrftkB+L._SX679_.jpg" alt="Product">
+        <h3>Ipad Apple M3</h3>
+        <a href="https://www.amazon.in/Apple-iPad-Pro-13%E2%80%B3-M4/dp/B0D3J8C5HF?ref_=ast_sto_dp&th=1">Buy Now</a>
+      </div>
+
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/616bgkA2J0L._SX679_.jpg" alt="Product">
+        <h3>Product Name 4</h3>
+        <a href="https://www.amazon.in/2022-Apple-TV-4K-Wi%E2%80%91Fi-with-64GB-Storage-3rd-Generation/dp/B0BJMP7DRF?ref_=ast_sto_dp">Buy Now</a>
+      </div>
+
+      <!-- Continue until you have 25 products -->
+
+    </div>
+  </div>
+</body>
+</html>
